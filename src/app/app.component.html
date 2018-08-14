@@ -1,20 +1,31 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="app">
+  <div class="filters">
+    <div class="filters__group" *ngFor="let filters of getFilters">
+      <div class="filters__group-header">{{ filters.title }}</div>
+      <div class="filters__group-body">
+        <div class="ui-checkbox__wrapper" *ngFor="let filter of filters.list">
+          <div class="ui-checkbox" *ngIf="filter.length">
+            <input type="checkbox" [id]="filter.title" [checked]="isChecked(filters.group, filter.title)" (change)="changeFilter(filters.group, filter.title)">
+            <label [for]="filter.title">{{ filter.title }} ({{ filter.length }})</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table">
+      <div class="table__header">
+        <div class="table__cell" (click)="onSortTable('name')">Имя</div>
+        <div class="table__cell" (click)="onSortTable('age')">Возраст</div>
+        <div class="table__cell" (click)="onSortTable('gender')">Пол</div>
+        <div class="table__cell" (click)="onSortTable('department')">Департамент</div>
+        <div class="table__cell" (click)="onSortTable('address.city')">Адрес</div>
+      </div>
+      <div class="table__row" *ngFor="let user of usersView">
+        <div class="table__cell">{{user?.name}}</div>
+        <div class="table__cell">{{user?.age}}</div>
+        <div class="table__cell">{{user?.gender}}</div>
+        <div class="table__cell">{{user?.department}}</div>
+        <div class="table__cell">{{user?.address.city}}, {{user?.address.street}}</div>
+      </div>
+    </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
